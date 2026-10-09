@@ -1,0 +1,373 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="CibGo adalah platform layanan lokal yang sedang dikembangkan untuk Cibaliung dan sekitarnya, meliputi CibFood, CibRide, CibMart, dan CibSend." />
+  <title>CibGo — Semua Ada, Semua Bisa</title>
+  <style>
+    :root{
+      --navy:#0A2B63;
+      --green:#00B94F;
+      --ink:#07111F;
+      --muted:#607083;
+      --line:#E7EDF3;
+      --soft:#F5F8FB;
+      --white:#FFFFFF;
+      --orange:#F57C00;
+      --purple:#6C3CC8;
+      --blue:#1465D8;
+      --shadow:0 18px 50px rgba(10,43,99,.10);
+      --radius:24px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+      color:var(--ink);
+      background:var(--white);
+      line-height:1.6;
+    }
+    a{color:inherit;text-decoration:none}
+    .wrap{width:min(1120px,calc(100% - 36px));margin:auto}
+    .topbar{
+      position:sticky;top:0;z-index:30;
+      background:rgba(255,255,255,.94);
+      backdrop-filter:blur(12px);
+      border-bottom:1px solid rgba(231,237,243,.9);
+    }
+    .nav{height:72px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+    .brand{display:flex;align-items:center;font-weight:900;font-size:28px;letter-spacing:-1.4px}
+    .brand .cib{color:var(--navy)}
+    .brand .go{color:var(--green)}
+    .navlinks{display:flex;gap:24px;font-size:14px;font-weight:700;color:#42546A}
+    .pill{
+      display:inline-flex;align-items:center;gap:8px;
+      padding:10px 14px;border-radius:999px;
+      background:#EAFBF1;color:#087A38;font-size:13px;font-weight:800;
+      border:1px solid #CDEFD9;
+    }
+    .dot{width:8px;height:8px;border-radius:50%;background:var(--green)}
+    .hero{
+      overflow:hidden;
+      background:
+        radial-gradient(circle at 85% 15%,rgba(0,185,79,.13),transparent 30%),
+        radial-gradient(circle at 10% 90%,rgba(10,43,99,.10),transparent 28%),
+        linear-gradient(180deg,#FFFFFF 0%,#F8FBFD 100%);
+      padding:88px 0 72px;
+    }
+    .hero-grid{display:grid;grid-template-columns:1.08fr .92fr;gap:58px;align-items:center}
+    .eyebrow{color:var(--green);font-weight:900;font-size:14px;letter-spacing:.12em;text-transform:uppercase}
+    h1{font-size:clamp(42px,7vw,76px);line-height:.98;letter-spacing:-3.6px;margin:16px 0 24px}
+    h1 .navy{color:var(--navy)}
+    h1 .green{color:var(--green)}
+    .lead{font-size:19px;color:#506176;max-width:650px;margin:0 0 28px}
+    .actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
+    .btn{
+      display:inline-flex;align-items:center;justify-content:center;
+      min-height:48px;padding:0 20px;border-radius:14px;font-weight:850;font-size:14px;
+      border:1px solid var(--navy);
+    }
+    .btn.primary{background:var(--navy);color:white}
+    .btn.secondary{background:white;color:var(--navy)}
+    .hero-card{
+      background:white;border:1px solid var(--line);border-radius:30px;
+      box-shadow:var(--shadow);padding:28px;
+    }
+    .mock-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:24px}
+    .mini-brand{font-size:24px;font-weight:900;letter-spacing:-1px}
+    .services-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+    .service{
+      border:1px solid var(--line);border-radius:20px;padding:20px;min-height:155px;
+      background:#fff;
+    }
+    .ico{
+      width:44px;height:44px;border-radius:14px;display:grid;place-items:center;
+      color:white;font-size:21px;font-weight:900;margin-bottom:16px
+    }
+    .food{background:var(--orange)} .ride{background:var(--green)}
+    .mart{background:#177D45} .send{background:var(--blue)}
+    .service h3{margin:0 0 5px;font-size:17px}
+    .service p{margin:0;color:var(--muted);font-size:13px}
+    .service small{display:inline-block;margin-top:10px;font-size:11px;font-weight:800;color:#52657A;background:var(--soft);padding:5px 8px;border-radius:999px}
+    section{padding:82px 0}
+    .soft{background:var(--soft)}
+    .section-head{max-width:760px;margin-bottom:36px}
+    .section-head h2{font-size:clamp(30px,4vw,46px);letter-spacing:-1.8px;line-height:1.08;margin:0 0 14px;color:var(--navy)}
+    .section-head p{margin:0;color:var(--muted);font-size:17px}
+    .cards{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+    .card{
+      background:white;border:1px solid var(--line);border-radius:var(--radius);
+      padding:24px;box-shadow:0 8px 26px rgba(10,43,99,.05)
+    }
+    .card h3{margin:4px 0 8px;font-size:19px}
+    .card p{margin:0;color:var(--muted);font-size:14px}
+    .status{margin-top:16px;font-size:12px;font-weight:850}
+    .status.pilot{color:#A54E00}.status.dev{color:#53667B}
+    .flow{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;counter-reset:step}
+    .step{position:relative;background:white;border:1px solid var(--line);border-radius:20px;padding:24px}
+    .step:before{
+      counter-increment:step;content:counter(step);
+      width:34px;height:34px;border-radius:11px;background:var(--navy);color:white;
+      display:grid;place-items:center;font-weight:900;margin-bottom:18px
+    }
+    .step h3{margin:0 0 6px;font-size:17px}
+    .step p{margin:0;color:var(--muted);font-size:14px}
+    .pricing{
+      display:grid;grid-template-columns:1.1fr .9fr;gap:24px;align-items:stretch
+    }
+    .pricebox,.notice{
+      border-radius:26px;padding:30px;border:1px solid var(--line);background:white
+    }
+    .price{font-size:42px;font-weight:950;color:var(--navy);letter-spacing:-2px;margin:8px 0 6px}
+    .price span{font-size:17px;letter-spacing:0;color:var(--muted);font-weight:700}
+    .lineitem{display:flex;justify-content:space-between;gap:18px;padding:13px 0;border-bottom:1px dashed var(--line);font-size:14px}
+    .lineitem:last-child{border-bottom:0}
+    .notice{background:linear-gradient(145deg,var(--navy),#123F84);color:white;border:0}
+    .notice h3{font-size:27px;line-height:1.1;margin:0 0 16px}
+    .notice p{color:#D9E5F6;margin:0 0 14px}
+    .badge-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:22px}
+    .badge{padding:8px 10px;border-radius:999px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.18);font-size:12px;font-weight:800}
+    .area{
+      display:grid;grid-template-columns:1fr 1fr;gap:22px
+    }
+    .area-box{border:1px solid var(--line);border-radius:24px;padding:28px;background:white}
+    .area-box h3{margin:0 0 8px;color:var(--navy);font-size:22px}
+    .area-box p{color:var(--muted);margin:0}
+    .legal{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+    .legal details{background:white;border:1px solid var(--line);border-radius:18px;padding:18px 20px}
+    .legal summary{font-weight:850;cursor:pointer;color:var(--navy)}
+    .legal p{color:var(--muted);font-size:14px;margin:14px 0 0}
+    footer{background:var(--ink);color:white;padding:46px 0}
+    .foot{display:flex;justify-content:space-between;align-items:flex-start;gap:30px}
+    .foot p{max-width:640px;color:#BAC6D2;font-size:14px;margin:10px 0 0}
+    .foot-note{font-size:12px;color:#91A0AE;text-align:right}
+    @media (max-width:900px){
+      .navlinks{display:none}
+      .hero{padding:64px 0 58px}
+      .hero-grid,.pricing,.area{grid-template-columns:1fr}
+      .hero-grid{gap:34px}
+      .cards,.flow{grid-template-columns:1fr 1fr}
+      h1{letter-spacing:-2.6px}
+    }
+    @media (max-width:560px){
+      .wrap{width:min(100% - 26px,1120px)}
+      .nav{height:64px}
+      .brand{font-size:25px}
+      .pill{font-size:11px;padding:8px 10px}
+      .hero{padding:48px 0}
+      .services-grid,.cards,.flow,.legal{grid-template-columns:1fr}
+      .service{min-height:auto}
+      section{padding:64px 0}
+      .foot{display:block}
+      .foot-note{text-align:left;margin-top:24px}
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="wrap nav">
+      <a class="brand" href="#beranda" aria-label="CibGo">
+        <span class="cib">Cib</span><span class="go">Go</span>
+      </a>
+      <nav class="navlinks">
+        <a href="#layanan">Layanan</a>
+        <a href="#cara-kerja">Cara Kerja</a>
+        <a href="#tarif">Tarif</a>
+        <a href="#wilayah">Wilayah</a>
+      </nav>
+      <span class="pill"><span class="dot"></span> Dalam pengembangan</span>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="beranda">
+      <div class="wrap hero-grid">
+        <div>
+          <div class="eyebrow">Platform layanan lokal Cibaliung</div>
+          <h1><span class="navy">Semua Ada,</span><br><span class="green">Semua Bisa.</span></h1>
+          <p class="lead">
+            CibGo adalah platform layanan berbasis aplikasi yang sedang dikembangkan untuk membantu kebutuhan harian masyarakat Cibaliung dan sekitarnya melalui layanan pesan-antar, transportasi, belanja, dan pengiriman.
+          </p>
+          <div class="actions">
+            <a class="btn primary" href="#layanan">Lihat layanan CibGo</a>
+            <a class="btn secondary" href="#tarif">Lihat contoh tarif</a>
+          </div>
+        </div>
+
+        <div class="hero-card" aria-label="Ringkasan layanan CibGo">
+          <div class="mock-head">
+            <div class="mini-brand"><span style="color:var(--navy)">Cib</span><span style="color:var(--green)">Go</span></div>
+            <span class="pill">Tahap pengembangan</span>
+          </div>
+          <div class="services-grid">
+            <div class="service">
+              <div class="ico food">F</div>
+              <h3>CibFood</h3>
+              <p>Pemesanan dan pengantaran makanan dari merchant lokal.</p>
+              <small>Tahap pilot</small>
+            </div>
+            <div class="service">
+              <div class="ico ride">R</div>
+              <h3>CibRide</h3>
+              <p>Layanan transportasi untuk perjalanan lokal.</p>
+              <small>Dalam pengembangan</small>
+            </div>
+            <div class="service">
+              <div class="ico mart">M</div>
+              <h3>CibMart</h3>
+              <p>Belanja kebutuhan dari toko atau merchant sekitar.</p>
+              <small>Dalam pengembangan</small>
+            </div>
+            <div class="service">
+              <div class="ico send">S</div>
+              <h3>CibSend</h3>
+              <p>Pengiriman barang dan dokumen di area layanan.</p>
+              <small>Dalam pengembangan</small>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="layanan">
+      <div class="wrap">
+        <div class="section-head">
+          <h2>Satu ekosistem untuk kebutuhan lokal</h2>
+          <p>CibGo dikembangkan bertahap dengan fokus awal pada kebutuhan masyarakat dan pelaku usaha lokal. Fitur yang belum siap belum ditawarkan sebagai layanan aktif.</p>
+        </div>
+        <div class="cards">
+          <article class="card">
+            <div class="ico food">F</div>
+            <h3>CibFood</h3>
+            <p>Pelanggan memilih merchant dan menu, melihat rincian biaya, kemudian pesanan diproses merchant dan diantarkan mitra driver.</p>
+            <div class="status pilot">● Tahap pilot & pengujian</div>
+          </article>
+          <article class="card">
+            <div class="ico ride">R</div>
+            <h3>CibRide</h3>
+            <p>Dirancang untuk menghubungkan pelanggan dengan mitra driver untuk perjalanan lokal secara praktis.</p>
+            <div class="status dev">● Dalam pengembangan</div>
+          </article>
+          <article class="card">
+            <div class="ico mart">M</div>
+            <h3>CibMart</h3>
+            <p>Dirancang untuk pemesanan kebutuhan harian dari merchant atau toko lokal dengan layanan pengantaran.</p>
+            <div class="status dev">● Dalam pengembangan</div>
+          </article>
+          <article class="card">
+            <div class="ico send">S</div>
+            <h3>CibSend</h3>
+            <p>Dirancang untuk pengiriman barang atau dokumen dari pengirim ke penerima dalam cakupan layanan CibGo.</p>
+            <div class="status dev">● Dalam pengembangan</div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="soft" id="cara-kerja">
+      <div class="wrap">
+        <div class="section-head">
+          <h2>Cara pemesanan CibGo</h2>
+          <p>Alur dirancang sederhana dan transparan agar pelanggan dapat mengetahui layanan, rincian biaya, dan status pesanan sebelum transaksi diselesaikan.</p>
+        </div>
+        <div class="flow">
+          <div class="step"><h3>Pilih layanan</h3><p>Pelanggan memilih layanan yang tersedia pada aplikasi CibGo.</p></div>
+          <div class="step"><h3>Isi detail pesanan</h3><p>Pilih merchant/menu atau masukkan titik jemput dan tujuan sesuai jenis layanan.</p></div>
+          <div class="step"><h3>Lihat rincian biaya</h3><p>Aplikasi menampilkan subtotal, ongkir, biaya layanan, promo jika ada, dan total pembayaran.</p></div>
+          <div class="step"><h3>Pesanan diproses</h3><p>Merchant dan/atau mitra driver menangani pesanan hingga diterima pelanggan.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="tarif">
+      <div class="wrap">
+        <div class="section-head">
+          <h2>Contoh tarif tahap pilot</h2>
+          <p>Contoh berikut digunakan untuk CibFood pada tahap pilot. Harga makanan ditentukan merchant dan ditampilkan kepada pelanggan sebelum checkout.</p>
+        </div>
+        <div class="pricing">
+          <div class="pricebox">
+            <div style="font-size:13px;font-weight:900;color:var(--green);text-transform:uppercase;letter-spacing:.1em">CibFood Regular</div>
+            <div class="price">Rp9.000 <span>ongkir mulai</span></div>
+            <div class="lineitem"><span>Jarak hingga 3 km</span><strong>Rp9.000</strong></div>
+            <div class="lineitem"><span>Biaya layanan platform</span><strong>Rp1.000</strong></div>
+            <div class="lineitem"><span>Harga makanan/minuman</span><strong>Sesuai merchant</strong></div>
+            <p style="color:var(--muted);font-size:13px;margin:18px 0 0">Untuk jarak lebih jauh, ongkir dapat bertambah sesuai jarak dan konfigurasi tarif yang berlaku. Total akhir selalu ditampilkan sebelum pemesanan dikonfirmasi.</p>
+          </div>
+          <aside class="notice">
+            <h3>Pembayaran transparan dan bertahap</h3>
+            <p>Pelanggan hanya akan melihat metode pembayaran yang benar-benar tersedia dan aktif pada aplikasi.</p>
+            <p>Integrasi pembayaran digital/QRIS sedang dipersiapkan dan hanya akan ditampilkan setelah seluruh proses teknis dan operasional selesai.</p>
+            <div class="badge-row">
+              <span class="badge">Harga tampil sebelum checkout</span>
+              <span class="badge">Metode aktif saja</span>
+              <span class="badge">Transaksi tercatat</span>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <section class="soft" id="wilayah">
+      <div class="wrap">
+        <div class="section-head">
+          <h2>Fokus awal di Cibaliung</h2>
+          <p>CibGo dibangun untuk kebutuhan lokal dan akan diperluas secara bertahap berdasarkan kesiapan operasional.</p>
+        </div>
+        <div class="area">
+          <div class="area-box">
+            <h3>Area awal</h3>
+            <p>Cibaliung, Kabupaten Pandeglang, Banten, dengan pengembangan layanan bertahap ke wilayah sekitar.</p>
+          </div>
+          <div class="area-box">
+            <h3>Model kemitraan</h3>
+            <p>CibGo bekerja sama dengan merchant dan mitra driver lokal untuk membantu pemesanan, pengantaran, transportasi, dan pengiriman.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="informasi">
+      <div class="wrap">
+        <div class="section-head">
+          <h2>Informasi bisnis & kebijakan</h2>
+          <p>Website ini merupakan halaman informasi resmi CibGo selama aplikasi berada dalam tahap pengembangan dan pengujian.</p>
+        </div>
+        <div class="legal">
+          <details open>
+            <summary>Status layanan</summary>
+            <p>CibGo belum diluncurkan penuh untuk publik. CibFood berada pada tahap pilot/pengujian, sedangkan CibRide, CibMart, dan CibSend masih dalam pengembangan. Ketersediaan final akan mengikuti kesiapan sistem dan operasional.</p>
+          </details>
+          <details>
+            <summary>Kebijakan privasi ringkas</summary>
+            <p>CibGo merancang pemrosesan data hanya untuk kebutuhan akun, operasional layanan, keamanan, dukungan pelanggan, dan kewajiban hukum. Data sensitif tidak ditampilkan secara publik dan akses internal dibatasi sesuai peran.</p>
+          </details>
+          <details>
+            <summary>Ketentuan transaksi ringkas</summary>
+            <p>Rincian biaya ditampilkan sebelum checkout. Harga produk mengikuti merchant, sedangkan biaya pengantaran dan biaya layanan mengikuti konfigurasi CibGo yang berlaku pada saat pemesanan.</p>
+          </details>
+          <details>
+            <summary>Pembayaran</summary>
+            <p>Metode pembayaran hanya akan ditampilkan ketika metode tersebut aktif dan berfungsi end-to-end. QRIS sedang dalam tahap persiapan integrasi produksi dan belum dinyatakan aktif pada website ini.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap foot">
+      <div>
+        <div class="brand" aria-label="CibGo"><span class="cib" style="color:white">Cib</span><span class="go">Go</span></div>
+        <p>CibGo — platform layanan lokal yang sedang dikembangkan untuk masyarakat Cibaliung dan sekitarnya. Semua Ada, Semua Bisa.</p>
+      </div>
+      <div class="foot-note">
+        <div>© 2026 CibGo</div>
+        <div>Website informasi bisnis • Dalam pengembangan</div>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
